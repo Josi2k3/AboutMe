@@ -501,6 +501,139 @@
       transform: scale(1);
       opacity: 1;
     }
+    /* Timeline Styles */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem 0;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: #333;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: linear-gradient(180deg, var(--primary-color), #0057ff);
+  top: 0;
+  height: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  transition: height 0.7s ease;
+}
+
+.timeline-item {
+  padding: 2rem 0;
+  position: relative;
+  width: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+}
+
+.timeline-content {
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  position: relative;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.timeline-content h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: -10px;
+  background-color: var(--primary-color);
+  border: 3px solid var(--dark-bg);
+  top: 30px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-item:nth-child(even)::before {
+  left: -10px;
+  right: auto;
+}
+
+/* Timeline progress animation */
+.timeline::before {
+  height: var(--timeline-progress, 0%);
+}
+
+/* Individual timeline dots animation */
+.timeline-item::before {
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition-delay: calc(var(--item-index, 0) * 0.2s);
+}
+
+.timeline.visible .timeline-item::before {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Responsive styles for timeline */
+@media (max-width: 768px) {
+  .timeline::after {
+    left: 30px; 
+  }
+
+  .timeline::before {
+    left: 8px; 
+    transform: none;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 60px; 
+    padding-right: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+
+  .timeline-item::before {
+    left: 20px; 
+  }
+
+  .timeline-item:nth-child(even)::before {
+    left: 20px;
+  }
+
+  .timeline-content {
+    width: 100%;
+    padding: 1rem; 
+  }
+}
 
     /* Contact Section */
     .contact-container {
